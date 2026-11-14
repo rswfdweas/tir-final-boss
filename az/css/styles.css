@@ -1,0 +1,1807 @@
+/* ==========================================================================
+   Tecnología e Insumos Rápidos BOL S.R.L. — hoja de estilos
+   Mobile first. Sin dependencias.
+   ========================================================================== */
+
+:root {
+  /* Paleta (tomada del logo) */
+  --naranja: #E1582C;
+  --naranja-osc: #C4471F;
+  --naranja-btn: #CC4A20;
+  --naranja-btn-osc: #AE3D17;
+  --marino: #273170;
+  --marino-osc: #1D2557;
+  --plata: #C7CCD4;
+  --plata-clara: #E9ECF0;
+  --plata-osc: #AEB4BE;
+  --fondo: #F6F7F9;
+  --blanco: #FFFFFF;
+  --texto: #1B1F3B;
+  --texto-suave: #4B5070;
+
+  /* Acero cepillado: degradado metálico + vetas finas */
+  --acero: linear-gradient(135deg, #E9ECF0 0%, #C7CCD4 46%, #AEB4BE 100%);
+  --filete: linear-gradient(90deg, #E9ECF0 0%, #AEB4BE 28%, #E9ECF0 58%, #AEB4BE 86%, #E9ECF0 100%);
+  --vetas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='240'%3E%3Cfilter id='v' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.95' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.1 0 0 0 -0.34'/%3E%3C/filter%3E%3Crect width='480' height='240' filter='url(%23v)'/%3E%3C/svg%3E");
+
+  /* Inclinación del logo */
+  --inclinacion: -15deg;
+
+  --gutter: clamp(1.25rem, 4.5vw, 2.5rem);
+  --ancho: 76rem;
+  --cabecera-h: 5.25rem;
+  --radio: 3px;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+
+  --fuente: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--cabecera-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--blanco);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, iframe { display: block; max-width: 100%; }
+
+h1, h2, h3, p, ul, ol, address { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+address { font-style: normal; }
+
+h1, h2, h3 {
+  font-stretch: 112%;
+  line-height: 1.08;
+  color: var(--marino);
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 2.4vw + 1.1rem, 2.75rem);
+  font-weight: 750;
+  letter-spacing: -.015em;
+}
+
+h3 {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p { text-wrap: pretty; }
+
+a { color: var(--marino); }
+
+:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.seccion { padding-block: clamp(4rem, 9vw, 7.5rem); }
+
+.solo-lector {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.saltar {
+  position: fixed;
+  top: .5rem; left: .5rem;
+  z-index: 100;
+  padding: .75rem 1rem;
+  background: var(--marino);
+  color: #fff;
+  font-weight: 700;
+  border-radius: var(--radio);
+  transform: translateY(-200%);
+}
+.saltar:focus { transform: none; }
+
+.encabezado { max-width: 44rem; }
+.encabezado p {
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- Logo (se recorta el lienzo vacío sin tocar el archivo) ---------- */
+.logo {
+  position: relative;
+  display: block;
+  height: 3.5rem;
+  aspect-ratio: 704 / 272;
+  overflow: hidden;
+}
+.logo img {
+  position: absolute;
+  max-width: none;
+  width: 153.409%;      /* 1080 / 704 */
+  height: auto;
+  left: -26.705%;       /* 188 / 704 */
+  top: -148.529%;       /* 404 / 272 */
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .625rem;
+  min-height: 3.25rem;
+  padding: .75rem 1.625rem;
+  font: inherit;
+  font-weight: 700;
+  font-stretch: 106%;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  border-radius: var(--radio);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s, transform .2s var(--curva), box-shadow .2s;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--primario {
+  background: var(--naranja-btn);
+  color: #fff;
+  box-shadow: 0 10px 22px -12px rgba(204, 74, 32, .8);
+}
+.btn--primario:hover { background: var(--naranja-btn-osc); }
+
+.btn--secundario {
+  background: transparent;
+  color: var(--marino);
+  border-color: var(--marino);
+}
+.btn--secundario:hover { background: var(--marino); color: #fff; }
+
+.btn--compacto {
+  min-height: 2.75rem;
+  padding: .5rem 1.125rem;
+  font-size: .9375rem;
+}
+
+.icono-wa { width: 1.25rem; height: 1.25rem; flex: none; fill: currentColor; }
+
+.enlace {
+  display: inline-block;
+  font-weight: 650;
+  text-underline-offset: .25em;
+  text-decoration-color: var(--naranja);
+  text-decoration-thickness: 2px;
+}
+.enlace:hover { color: var(--naranja-osc); }
+
+/* ==========================================================================
+   Cabecera
+   ========================================================================== */
+.cabecera {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, .95);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: saturate(1.4) blur(12px);
+  transition: box-shadow .3s;
+}
+.cabecera::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--filete);
+}
+.cabecera.is-scrolled { box-shadow: 0 10px 30px -18px rgba(27, 31, 59, .45); }
+
+.cabecera__in {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: var(--cabecera-h);
+}
+
+.marca { margin-right: auto; display: block; border-radius: 2px; }
+/* Al pasar el mouse el logo crece un poco (hacia la derecha, para no salirse del borde) */
+.marca .logo {
+  transform-origin: 0 50%;
+  transition: transform .35s var(--curva);
+}
+@media (hover: hover) {
+  .marca:hover .logo { transform: scale(1.12); }
+}
+.marca:focus-visible .logo { transform: scale(1.12); }
+
+.menu ul { display: flex; gap: 1.25rem; overflow-x: auto; }
+.menu a {
+  position: relative;
+  display: block;
+  padding: .75rem 0;
+  font-weight: 620;
+  font-size: 1rem;
+  color: var(--marino);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu-btn { display: none; }
+
+/* Menú plegable en celular (solo si hay JavaScript) */
+@media (max-width: 59.99rem) {
+  .js .menu {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    display: none;
+    padding: .25rem var(--gutter) 1.25rem;
+    background: var(--blanco);
+    border-top: 1px solid var(--plata-clara);
+    box-shadow: 0 24px 40px -24px rgba(27, 31, 59, .45);
+  }
+  .js .menu.is-open { display: block; }
+  .js .menu ul { display: block; overflow: visible; }
+  .js .menu li + li { border-top: 1px solid var(--plata-clara); }
+  .js .menu a { padding: 1rem 0; font-size: 1.0625rem; }
+  .js .menu a[aria-current="true"] { color: var(--naranja-osc); }
+
+  .js .menu-btn {
+    display: grid;
+    place-items: center;
+    width: 2.75rem; height: 2.75rem;
+    padding: 0;
+    background: none;
+    border: 1.5px solid var(--plata);
+    border-radius: var(--radio);
+    cursor: pointer;
+  }
+  .menu-btn__barras,
+  .menu-btn__barras::before,
+  .menu-btn__barras::after {
+    display: block;
+    width: 1.25rem; height: 2px;
+    background: var(--marino);
+    border-radius: 1px;
+    transition: transform .25s var(--curva), background-color .2s;
+  }
+  .menu-btn__barras { position: relative; }
+  .menu-btn__barras::before,
+  .menu-btn__barras::after { content: ""; position: absolute; left: 0; }
+  .menu-btn__barras::before { top: -6px; }
+  .menu-btn__barras::after { top: 6px; }
+  .menu-btn[aria-expanded="true"] .menu-btn__barras { background: transparent; }
+  .menu-btn[aria-expanded="true"] .menu-btn__barras::before { transform: translateY(6px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .menu-btn__barras::after { transform: translateY(-6px) rotate(-45deg); }
+
+  html:not(.js) .cabecera__in { flex-wrap: wrap; padding-block: .5rem; }
+  html:not(.js) .menu { order: 3; width: 100%; }
+
+  .js .menu-btn { flex: none; }
+}
+
+/* Celulares muy angostos: el logo vuelve a su tamaño compacto para que quepan el botón y el menú */
+@media (max-width: 22.49rem) {
+  .logo { height: 2.5rem; }
+  .cabecera__in { gap: .5rem; }
+}
+@media (min-width: 22.5rem) and (max-width: 23.43rem) {
+  .logo { height: 3rem; }
+}
+
+@media (min-width: 60rem) {
+  :root { --cabecera-h: 6.75rem; }
+  .logo { height: 5rem; }
+  .cabecera__in { gap: 2.25rem; }
+  .menu ul { gap: 2rem; overflow: visible; }
+  .menu a { font-size: .9688rem; }
+  .menu a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: .4rem;
+    height: 2px;
+    background: var(--naranja);
+    transform: scaleX(0) skewX(var(--inclinacion));
+    transform-origin: 0 50%;
+    transition: transform .3s var(--curva);
+  }
+  .menu a:hover::after,
+  .menu a[aria-current="true"]::after { transform: scaleX(1) skewX(var(--inclinacion)); }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--cabecera-h);
+  background: var(--fondo);
+}
+
+.hero__in {
+  display: grid;
+  gap: clamp(2.5rem, 8vw, 3.5rem);
+  padding-top: clamp(2.75rem, 9vw, 4.5rem);
+}
+
+.hero__texto { max-width: 40rem; }
+
+.hero h1 {
+  font-size: clamp(2.25rem, 6.2vw + .75rem, 4rem);
+  font-weight: 800;
+  font-stretch: 108%;
+  line-height: 1.02;
+  letter-spacing: -.022em;
+}
+
+.hero__sub {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  font-size: clamp(1.0625rem, .6vw + 1rem, 1.25rem);
+  color: var(--texto-suave);
+}
+
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .875rem;
+  margin-top: 2.25rem;
+}
+.hero__acciones .btn { flex: 1 1 10rem; max-width: 15rem; }
+
+.hero__tel {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--texto-suave);
+}
+.hero__tel a {
+  font-weight: 700;
+  white-space: nowrap;
+  text-underline-offset: .25em;
+  text-decoration-color: var(--naranja);
+  text-decoration-thickness: 2px;
+}
+
+/* Panel de acero cortado con la inclinación del logo */
+.hero__panel {
+  position: relative;
+  height: clamp(15rem, 68vw, 23rem);
+  margin-inline: calc(var(--gutter) * -1);
+}
+.hero__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 -40% 0 0;
+  background:
+    linear-gradient(100deg, transparent 22%, rgba(255, 255, 255, .6) 42%, transparent 60%),
+    var(--vetas),
+    var(--acero);
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+}
+.hero__panel::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -13px;
+  width: 6px;
+  background: var(--naranja);
+  box-shadow: -11px 0 0 var(--marino);
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+}
+
+.hero__art {
+  position: absolute;
+  inset: 9% 3% 0 15%;
+  width: 82%;
+  height: 91%;
+  z-index: 1;
+}
+.hero__art .t { stroke: var(--marino); stroke-width: 2.6; }
+.hero__art .s { stroke: var(--marino); stroke-width: 1.6; opacity: .5; }
+.hero__art .a { stroke: var(--naranja); stroke-width: 3.2; }
+.hero__art .af { fill: var(--naranja); stroke: none; }
+
+@media (min-width: 40rem) {
+  .hero__art .t { stroke-width: 2.2; }
+  .hero__art .s { stroke-width: 1.3; }
+  .hero__art .a { stroke-width: 2.6; }
+}
+
+@media (min-width: 60rem) {
+  .hero {
+    display: grid;
+    align-items: center;
+    min-height: min(43rem, 90svh);
+  }
+  .hero__in {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+    padding-block: 4.5rem;
+  }
+  .hero h1 { font-size: clamp(2.75rem, 4.1vw + .5rem, 4rem); }
+  .hero__panel {
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    left: calc(50% + 1.5rem);
+    height: auto;
+    margin: 0;
+  }
+  .hero__art {
+    inset: auto 3% 11% auto;
+    width: min(84%, 44rem);
+    height: auto;
+    aspect-ratio: 640 / 440;
+  }
+}
+
+@media (min-width: 80rem) {
+  .hero__panel { left: calc(50% + 3rem); }
+}
+
+/* Secuencia de entrada del hero: el plano se dibuja una sola vez */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__art .d {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.25;
+    animation: trazar 1.15s cubic-bezier(.55, 0, .2, 1) forwards;
+    animation-delay: calc(.2s + var(--i, 0) * 65ms);
+  }
+  .hero__art .af {
+    opacity: 0;
+    animation: aparecer .5s ease forwards 1.9s;
+  }
+  .hero__texto > * {
+    opacity: 0;
+    animation: subir .8s var(--curva) forwards;
+  }
+  .hero__texto > :nth-child(2) { animation-delay: .1s; }
+  .hero__texto > :nth-child(3) { animation-delay: .2s; }
+  .hero__texto > :nth-child(4) { animation-delay: .3s; }
+}
+
+@keyframes trazar { to { stroke-dashoffset: 0; } }
+@keyframes aparecer { to { opacity: 1; } }
+@keyframes subir {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Nosotros
+   ========================================================================== */
+.nosotros__in {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+
+.nosotros__texto p {
+  margin-top: 1.25rem;
+  max-width: 34rem;
+  color: var(--texto-suave);
+}
+.nosotros__texto p:first-of-type {
+  margin-top: 1.5rem;
+  font-size: 1.1875rem;
+  color: var(--texto);
+}
+
+.ventajas { display: grid; }
+
+.ventaja {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.125rem;
+  padding-block: 1.625rem;
+}
+.ventaja::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--filete);
+}
+.ventaja:last-child::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--filete);
+}
+.ventaja p {
+  margin-top: .4rem;
+  font-size: 1rem;
+  color: var(--texto-suave);
+}
+
+.ventaja__icono {
+  display: grid;
+  place-items: center;
+  width: 3.25rem; height: 3.25rem;
+  background: var(--vetas), var(--acero);
+  border-radius: var(--radio);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 -1px 0 rgba(27, 31, 59, .14);
+  color: var(--marino);
+}
+.ventaja__icono svg {
+  width: 1.625rem; height: 1.625rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (min-width: 40rem) {
+  .ventajas { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
+  .ventaja:nth-last-child(2)::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--filete);
+  }
+}
+
+@media (min-width: 60rem) {
+  .nosotros__in {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* ==========================================================================
+   Insumos y su origen (logo de la empresa + insumo que se trae)
+   ========================================================================== */
+.origenes {
+  position: relative;
+  background: var(--marino);
+  color: rgba(255, 255, 255, .84);
+  overflow: hidden;
+}
+/* Trama diagonal sutil, a 15° como el logo */
+.origenes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(105deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 26px);
+  -webkit-mask-image: linear-gradient(100deg, transparent 30%, #000 100%);
+  mask-image: linear-gradient(100deg, transparent 30%, #000 100%);
+  pointer-events: none;
+}
+.origenes > .contenedor { position: relative; }
+
+.origenes h2, .origenes h3 { color: #fff; }
+.origenes .encabezado p { color: rgba(255, 255, 255, .84); }
+.origenes :focus-visible { outline-color: #fff; }
+
+.origenes__grilla {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+/* Cada empresa en una fila: logo · insumo · foto del producto.
+   En celular: logo y foto arriba, texto debajo. */
+.origen {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-areas:
+    "placa producto"
+    "cuerpo cuerpo";
+  background: var(--marino-osc);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 26px 44px -30px rgba(0, 0, 0, .7);
+}
+/* Insumo sin empresa a la vista: el texto ocupa el lugar del logo */
+.origen--sin-logo {
+  grid-template-areas:
+    "producto producto"
+    "cuerpo cuerpo";
+}
+
+/* Placa blanca: cada logo conserva sus colores originales */
+.origen__placa {
+  grid-area: placa;
+  display: grid;
+  place-items: center;
+  min-height: 8.5rem;
+  padding: .875rem;
+  background: #fff;
+}
+.origen__placa img {
+  width: auto;
+  height: auto;
+  max-width: min(100%, 15rem);
+  max-height: var(--alto, 3.75rem);
+}
+/* Logo cuyo archivo trae un fondo casi blanco: se iguala al blanco de la placa */
+.origen__placa .logo-aclarar { filter: brightness(1.05); }
+
+.origen__cuerpo {
+  grid-area: cuerpo;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.625rem 1.5rem 1.375rem;
+}
+/* Pestaña naranja con la inclinación del logo, a caballo entre placa y texto */
+.origen__cuerpo::before {
+  content: "";
+  position: absolute;
+  top: -3px; left: 1.5rem;
+  width: 3rem; height: 6px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+}
+.origen--sin-logo .origen__cuerpo { justify-content: center; }
+
+.origen h3 { font-size: 1.375rem; line-height: 1.15; }
+.origen__de {
+  margin-top: .5rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .76);
+}
+.origen__sitio {
+  margin-top: auto;
+  padding-top: 1.125rem;
+  font-size: .9375rem;
+}
+.origen__sitio a {
+  font-weight: 600;
+  color: var(--plata-clara);
+  text-decoration-color: rgba(255, 255, 255, .35);
+  text-underline-offset: .25em;
+  overflow-wrap: anywhere;
+}
+.origen__sitio a:hover { color: #fff; text-decoration-color: var(--naranja); }
+
+/* Empresa de la que se traen varias líneas de insumos */
+.origen__lineas {
+  display: grid;
+  gap: .875rem;
+  margin-top: 1.375rem;
+}
+.origen__lineas li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.25;
+  color: #fff;
+}
+/* marcador naranja con la inclinación del logo */
+.origen__lineas li::before,
+.origen__linea::before,
+.calibres dt::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .2em;
+  width: .4375rem; height: .875em;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+}
+.origen__catalogo {
+  display: block;
+  width: fit-content;
+  margin-top: .3125rem;
+  font-size: .9375rem;
+  font-weight: 600;
+  font-stretch: 100%;
+  color: var(--plata-clara);
+  text-decoration-color: rgba(255, 255, 255, .35);
+  text-underline-offset: .25em;
+}
+.origen__catalogo::after { content: " →"; }
+.origen__catalogo:hover { color: #fff; text-decoration-color: var(--naranja); }
+
+/* Líneas con su ficha técnica al lado (colorantes) */
+.origen__lineas--filas { gap: 0; }
+.origen__lineas--filas li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+  min-height: 3.5rem;
+  padding: .375rem 0;
+}
+.origen__lineas--filas li + li { border-top: 1px solid rgba(199, 204, 212, .16); }
+.origen__lineas--filas li::before { content: none; }
+.origen__linea { position: relative; padding-left: 1.25rem; }
+.origen__codigo {
+  margin-left: .25rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  font-stretch: 100%;
+  letter-spacing: .02em;
+  color: var(--plata-osc);
+}
+
+/* Botón para descargar la ficha técnica (PDF) */
+.origen__ficha { margin-top: 1rem; }
+.ficha {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 2.75rem;
+  padding: .5rem .875rem;
+  font-size: .9375rem;
+  font-weight: 700;
+  font-stretch: 104%;
+  line-height: 1.2;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, .05);
+  border: 1.5px solid rgba(199, 204, 212, .38);
+  border-radius: var(--radio);
+  transition: background-color .2s, border-color .2s;
+}
+.ficha .icono-descarga { width: 1.125rem; height: 1.125rem; color: var(--naranja); transition: color .2s; }
+.ficha:hover { background: var(--naranja-btn); border-color: var(--naranja-btn); }
+.ficha:hover .icono-descarga { color: #fff; }
+
+/* Calibres de tripa natural */
+.calibres__rotulo {
+  margin-top: .875rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .76);
+}
+.calibres { display: grid; gap: .75rem; margin: .75rem 0 0; }
+.calibres > div {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  align-items: start;
+  gap: .75rem;
+}
+.calibres dt {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 2.125rem;
+  color: #fff;
+}
+.calibres dt::before { top: .625rem; height: .875rem; }
+.calibres dd { margin: 0; }
+.calibres ul { display: flex; flex-wrap: wrap; gap: .375rem; }
+.calibres li {
+  min-width: 3.75rem;
+  padding: .375rem .5rem;
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(199, 204, 212, .3);
+  border-radius: var(--radio);
+}
+
+/* Panel de acero cortado a 15° (como el del inicio) con la foto del producto */
+.origen__producto {
+  grid-area: producto;
+  position: relative;
+  min-height: 8.5rem;
+}
+.origen__producto::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 .875rem;
+  background:
+    linear-gradient(100deg, transparent 18%, rgba(255, 255, 255, .55) 44%, transparent 66%),
+    var(--vetas),
+    var(--acero);
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+}
+.origen__producto::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 5px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+}
+/* Foto del producto con el mismo corte a 15° del panel: el marco se inclina
+   y la foto se endereza dentro, así no se deforma. El acero queda debajo
+   y se ve mientras la foto carga. */
+.origen__foto {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 .875rem;
+  overflow: hidden;
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+}
+.origen__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--foco, 50% 50%);
+  transform: skewX(calc(var(--inclinacion) * -1));
+  transform-origin: 0 100%;
+}
+/* sombra suave junto al corte para que la foto se asiente sobre la tarjeta oscura */
+.origen__foto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 22, 44, .38), transparent 22%);
+  pointer-events: none;
+}
+
+.origenes__pie {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(199, 204, 212, .25);
+}
+.origenes__llamado {
+  font-size: clamp(1.1875rem, .8vw + 1rem, 1.4375rem);
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.25;
+  color: #fff;
+}
+.origenes__nota {
+  max-width: 44rem;
+  font-size: .875rem;
+  color: rgba(255, 255, 255, .64);
+}
+.origenes__nota a {
+  white-space: nowrap;
+  color: inherit;
+  text-decoration-color: rgba(255, 255, 255, .35);
+  text-underline-offset: .2em;
+}
+.origenes__nota a:hover { color: #fff; text-decoration-color: var(--naranja); }
+
+@media (min-width: 40rem) {
+  .origen {
+    grid-template-columns: 12rem minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-areas: "placa cuerpo producto";
+  }
+  .origen--sin-logo { grid-template-areas: "cuerpo cuerpo producto"; }
+  .origen__placa { min-height: 10rem; padding: 1rem 1.25rem; }
+  .origen__producto { min-height: 10rem; }
+  /* la pestaña pasa al borde izquierdo del texto, junto al logo */
+  .origen__cuerpo::before {
+    top: 1.75rem; left: -3px;
+    width: 6px; height: 3rem;
+  }
+  .origen--sin-logo .origen__cuerpo::before { left: 0; }
+}
+@media (min-width: 60rem) {
+  .origen { grid-template-columns: 15rem minmax(0, 1fr) minmax(0, 25rem); }
+  .origen__placa { min-height: 11rem; padding: 1.25rem 1.5rem; }
+  .origen__producto { min-height: 11rem; }
+  .origen__cuerpo { padding: 1.75rem 2.25rem 1.5rem; }
+  .origen__lineas {
+    grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+    gap: 1rem 1.5rem;
+  }
+  .origen__lineas--filas { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .origenes__pie {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 2.5rem;
+  }
+  .origenes__nota { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   Rubros
+   ========================================================================== */
+.rubros {
+  position: relative;
+  overflow: hidden;
+  background: var(--fondo);
+}
+/* Panel de acero muy tenue cortado a 15°, como el del inicio */
+.rubros::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 58%;
+  width: 70%;
+  background: var(--vetas), linear-gradient(135deg, #EEF0F3 0%, #E3E6EB 100%);
+  transform: skewX(var(--inclinacion));
+  transform-origin: 0 100%;
+  opacity: .8;
+  pointer-events: none;
+}
+.rubros > .contenedor { position: relative; }
+
+.rubros__lista {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Tarjeta blanca con la pestaña naranja inclinada del logo.
+   Celular: placa con el ícono a la izquierda y texto a la derecha. */
+.rubro {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1.25rem;
+  align-items: center;
+  padding: 1.375rem 1.25rem;
+  background: var(--blanco);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(27, 31, 59, .06), 0 22px 40px -30px rgba(27, 31, 59, .55);
+  transition: translate .45s var(--curva), box-shadow .45s var(--curva);
+}
+.rubro::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 1.25rem;
+  width: 2.5rem; height: 4px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+  transition: width .5s var(--curva);
+}
+
+/* Placa de acero inclinada que lleva el ícono; un brillo la cruza al pasar el mouse */
+.rubro__insignia {
+  grid-row: span 2;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.25rem; height: 4.25rem;
+}
+.rubro__insignia::before {
+  content: "";
+  position: absolute;
+  inset: 0 .375rem;
+  background:
+    linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, .75) 50%, transparent 65%) 130% 0 / 200% 100% no-repeat,
+    var(--vetas),
+    var(--acero);
+  border-radius: 3px;
+  transform: skewX(var(--inclinacion));
+  transition: background-position .9s var(--curva);
+}
+.rubro__icono {
+  position: relative;
+  width: 2.625rem; height: 2.625rem;
+  fill: none;
+  stroke: var(--marino);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .45s var(--curva);
+}
+.rubro__icono .ac { stroke: var(--naranja); }
+
+.rubro h3 { font-size: 1.125rem; }
+.rubro p {
+  margin-top: .3125rem;
+  font-size: .9688rem;
+  color: var(--texto-suave);
+}
+
+@media (hover: hover) {
+  .rubro:hover {
+    translate: 0 -6px;
+    box-shadow: 0 1px 2px rgba(27, 31, 59, .06), 0 30px 46px -28px rgba(27, 31, 59, .6);
+  }
+  .rubro:hover::before { width: calc(100% - 2.5rem); }
+  .rubro:hover .rubro__insignia::before { background-position: -30% 0, 0 0, 0 0; }
+  .rubro:hover .rubro__icono { transform: translateY(-2px) scale(1.08) rotate(-5deg); }
+}
+
+@media (min-width: 40rem) {
+  .rubros__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .rubro {
+    display: block;
+    padding: 2rem 1.5rem 1.875rem;
+  }
+  .rubro::before { left: 1.5rem; }
+  .rubro:hover::before { width: calc(100% - 3rem); }
+  .rubro__insignia { width: 4.75rem; height: 4.75rem; }
+  .rubro__icono { width: 2.875rem; height: 2.875rem; }
+  .rubro h3 { margin-top: 1.375rem; font-size: 1.1875rem; }
+}
+@media (min-width: 68rem) {
+  .rubros__lista { gap: 1.75rem; }
+  .rubro { padding: 2.25rem 2rem 2.125rem; }
+  .rubro::before { left: 2rem; }
+  .rubro:hover::before { width: calc(100% - 4rem); }
+}
+
+/* Entrada al llegar a la sección (la activa main.js): las tarjetas suben una tras otra
+   y los íconos se dibujan. Sin JavaScript o con movimiento reducido se ven quietas. */
+@media (prefers-reduced-motion: no-preference) {
+  .rubros__lista.animar .rubro { opacity: 0; }
+  .rubros__lista.animar.is-visible .rubro {
+    animation: entrar-tarjeta .75s var(--curva) forwards;
+    animation-delay: calc(var(--n, 0) * 140ms);
+  }
+  .rubros__lista.animar .rubro__icono :is(path, circle) {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.25;
+  }
+  .rubros__lista.animar.is-visible .rubro__icono :is(path, circle) {
+    animation: trazar 1.1s cubic-bezier(.55, 0, .2, 1) forwards;
+    animation-delay: calc(.35s + var(--n, 0) * 140ms);
+  }
+}
+@keyframes entrar-tarjeta {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Maquinaria nueva y semi nueva (franja de acero cepillado)
+   ========================================================================== */
+.maquinaria {
+  position: relative;
+  background:
+    linear-gradient(100deg, transparent 28%, rgba(255, 255, 255, .55) 47%, transparent 66%),
+    var(--vetas),
+    var(--acero);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 -1px 0 rgba(27, 31, 59, .16);
+}
+.maquinaria :focus-visible { outline-color: var(--marino); }
+.maquinaria .encabezado p { color: var(--texto); }
+
+.maquinaria__cabeza { display: grid; gap: 2rem; }
+
+/* Nueva / Semi nueva: rótulos con la inclinación del logo */
+/* La columna de rótulos toma el ancho del rótulo más largo */
+.condiciones {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .875rem 1.125rem;
+  align-items: center;
+  margin: 0;
+}
+.condicion { display: contents; }
+.condicion dt {
+  position: relative;
+  z-index: 0;
+  justify-self: start;
+  padding: .3125rem .875rem;
+  font-size: .9375rem;
+  font-weight: 750;
+  font-stretch: 108%;
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+}
+.condicion dt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--marino);
+  border-radius: 2px;
+  transform: skewX(var(--inclinacion));
+}
+.condicion--semi dt::before { background: var(--naranja-btn); }
+.condicion dd { margin: 0; font-size: 1rem; color: var(--texto); }
+
+/* Tarjetas de equipos: misma pieza que las de insumos (placa blanca + cuerpo marino) */
+.equipos {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.equipo {
+  display: flex;
+  flex-direction: column;
+  background: var(--marino);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 26px 44px -30px rgba(27, 31, 59, .8);
+}
+.equipo :focus-visible { outline-color: #fff; }
+
+.equipo__foto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+}
+.equipo__foto img {
+  position: absolute;
+  inset: 1.25rem 1.5rem;
+  width: calc(100% - 3rem);
+  height: calc(100% - 2.5rem);
+  object-fit: contain;
+}
+
+.equipo__cuerpo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.625rem 1.5rem 1.375rem;
+}
+/* Pestaña naranja con la inclinación del logo, a caballo entre foto y texto */
+.equipo__cuerpo::before {
+  content: "";
+  position: absolute;
+  top: -3px; left: 1.5rem;
+  width: 3rem; height: 6px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+}
+
+.equipo h3 { font-size: 1.375rem; line-height: 1.15; color: #fff; }
+.equipo__cuerpo > p:not(.equipo__consulta) {
+  margin-top: .625rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .8);
+}
+.equipo__consulta {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-size: .9375rem;
+}
+.equipo__consulta a {
+  font-weight: 600;
+  color: var(--plata-clara);
+  text-decoration-color: rgba(255, 255, 255, .35);
+  text-underline-offset: .25em;
+}
+.equipo__consulta a::after { content: " →"; }
+.equipo__consulta a:hover { color: #fff; text-decoration-color: var(--naranja); }
+
+.maquinaria__pie {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(39, 49, 112, .2);
+}
+.maquinaria__llamado {
+  font-size: clamp(1.1875rem, .8vw + 1rem, 1.4375rem);
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.25;
+  color: var(--marino);
+}
+.maquinaria__llamado span {
+  display: block;
+  max-width: 36rem;
+  margin-top: .5rem;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  font-stretch: 100%;
+  line-height: 1.5;
+  color: var(--texto);
+}
+.maquinaria__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .875rem;
+}
+
+/* Tableta: foto a la izquierda y texto a la derecha */
+@media (min-width: 34rem) and (max-width: 51.99rem) {
+  .equipo {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+  .equipo__foto { aspect-ratio: auto; min-height: 15rem; }
+  .equipo__cuerpo::before {
+    top: 1.75rem; left: -3px;
+    width: 6px; height: 3rem;
+  }
+}
+
+@media (min-width: 52rem) {
+  .equipos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+}
+
+@media (min-width: 60rem) {
+  .maquinaria__cabeza {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: 4rem;
+  }
+  .equipo__cuerpo { padding: 1.75rem 1.75rem 1.5rem; }
+  .equipo__cuerpo::before { left: 1.75rem; }
+  .maquinaria__pie {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 2.5rem;
+  }
+}
+
+/* Variante clara (apartado 2: maquinaria a medio uso de origen europeo) */
+.maquinaria--clara {
+  background: var(--fondo);
+  box-shadow: none;
+}
+
+/* Cuatro equipos: 2 x 2 en pantallas medianas y 4 columnas en pantallas anchas */
+@media (min-width: 52rem) {
+  .equipos--cuatro { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 72rem) {
+  .equipos--cuatro { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+  .equipos--cuatro .equipo__cuerpo { padding: 1.5rem 1.375rem 1.375rem; }
+  .equipos--cuatro .equipo__cuerpo::before { left: 1.375rem; }
+  .equipos--cuatro .equipo h3 { font-size: 1.25rem; }
+}
+
+.equipos__nota {
+  margin-top: 1.25rem;
+  font-size: .875rem;
+  color: var(--texto-suave);
+}
+
+/* ==========================================================================
+   Maquinaria: marcas (fabricantes, catálogo y equipos de ejemplo)
+   ========================================================================== */
+.fabricante { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.fabricante + .fabricante {
+  padding-top: clamp(2.5rem, 5vw, 3.5rem);
+  border-top: 1px solid rgba(39, 49, 112, .2);
+}
+
+.fabricante__cabeza {
+  display: grid;
+  gap: 1.25rem 2.25rem;
+  align-items: center;
+}
+
+/* Placa blanca para el logo, como en la sección de insumos */
+.fabricante__logo {
+  display: grid;
+  place-items: center;
+  width: 13rem;
+  height: 6.5rem;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 18px 34px -24px rgba(27, 31, 59, .6);
+}
+.fabricante__logo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: var(--alto, 3.5rem);
+}
+
+.fabricante h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem .875rem;
+  font-size: clamp(1.5rem, 1vw + 1.2rem, 1.875rem);
+}
+/* País: rótulo con la inclinación del logo */
+.fabricante__pais {
+  position: relative;
+  z-index: 0;
+  padding: .25rem .75rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.2;
+  letter-spacing: .02em;
+  color: #fff;
+}
+.fabricante__pais::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--marino);
+  border-radius: 2px;
+  transform: skewX(var(--inclinacion));
+}
+.fabricante__texto p {
+  margin-top: .625rem;
+  max-width: 40rem;
+  color: var(--texto);
+}
+
+.fabricante__descarga {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+}
+.fabricante__peso { font-size: .875rem; font-weight: 600; color: var(--texto); }
+
+.icono-descarga {
+  width: 1.25rem; height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Equipos de ejemplo de cada marca */
+.ejemplos {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+.ejemplo {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 22px 40px -30px rgba(27, 31, 59, .7);
+}
+.ejemplo__foto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-bottom: 1px solid var(--plata-clara);
+}
+.ejemplo__foto img {
+  position: absolute;
+  inset: 1rem 1.25rem;
+  width: calc(100% - 2.5rem);
+  height: calc(100% - 2rem);
+  object-fit: contain;
+}
+.ejemplo__cuerpo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 1.25rem 1.125rem;
+}
+/* Pestaña naranja con la inclinación del logo */
+.ejemplo__cuerpo::before {
+  content: "";
+  position: absolute;
+  top: -3px; left: 1.25rem;
+  width: 2.5rem; height: 5px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+}
+.ejemplo h4 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-stretch: 112%;
+  line-height: 1.2;
+  color: var(--marino);
+  text-wrap: balance;
+}
+.ejemplo__cuerpo > p:not(.ejemplo__consulta) {
+  margin-top: .4375rem;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--texto-suave);
+}
+.ejemplo__consulta {
+  margin-top: auto;
+  padding-top: .875rem;
+  font-size: .9375rem;
+}
+.ejemplo__consulta a {
+  font-weight: 650;
+  text-decoration-color: var(--naranja);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .25em;
+}
+.ejemplo__consulta a::after { content: " →"; }
+.ejemplo__consulta a:hover { color: var(--naranja-osc); }
+
+.fabricantes__nota {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  font-size: .875rem;
+  color: var(--texto);
+}
+
+/* Celular y tableta: foto a la izquierda y texto a la derecha (lista más corta y sin tarjetas sueltas) */
+@media (max-width: 51.99rem) {
+  .ejemplo {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+  .ejemplo__foto {
+    aspect-ratio: auto;
+    min-height: 9.5rem;
+    border-bottom: 0;
+    border-right: 1px solid var(--plata-clara);
+  }
+  .ejemplo__foto img {
+    inset: .75rem;
+    width: calc(100% - 1.5rem);
+    height: calc(100% - 1.5rem);
+  }
+  .ejemplo__cuerpo { padding: 1rem 1rem .875rem; }
+  .ejemplo__cuerpo::before {
+    top: 1rem; left: -3px;
+    width: 5px; height: 2.25rem;
+  }
+  .ejemplo h4 { font-size: 1.0625rem; }
+  .ejemplo__cuerpo > p:not(.ejemplo__consulta) { font-size: .875rem; }
+}
+@media (min-width: 34rem) and (max-width: 51.99rem) {
+  .ejemplo__foto { min-height: 12rem; }
+  .ejemplo__cuerpo { padding: 1.25rem 1.5rem 1.125rem; }
+  .ejemplo h4 { font-size: 1.1875rem; }
+  .ejemplo__cuerpo > p:not(.ejemplo__consulta) { font-size: .9375rem; }
+}
+@media (min-width: 52rem) {
+  .ejemplos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+}
+@media (min-width: 60rem) {
+  .fabricante__cabeza { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .fabricante__descarga { flex-direction: column; align-items: flex-start; }
+}
+
+/* ==========================================================================
+   Contacto
+   ========================================================================== */
+.contacto__in {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contacto__texto > p {
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  font-size: 1.125rem;
+  color: var(--texto-suave);
+}
+
+.contacto__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .875rem;
+  margin-top: 2rem;
+}
+.contacto__acciones .btn { flex: 1 1 auto; }
+
+.datos { display: grid; margin-top: 2.25rem; }
+.datos > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding-block: 1.125rem;
+}
+.datos > li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--filete);
+}
+.datos__icono { color: var(--marino); padding-top: .15rem; }
+.datos__icono svg {
+  width: 1.5rem; height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.datos__rotulo {
+  display: block;
+  font-size: .9375rem;
+  color: var(--texto-suave);
+}
+.datos a, .datos address {
+  font-size: 1.125rem;
+  font-weight: 650;
+  color: var(--texto);
+  overflow-wrap: anywhere;
+}
+.datos a {
+  color: var(--marino);
+  text-underline-offset: .25em;
+  text-decoration-color: var(--plata-osc);
+}
+.datos a:hover { text-decoration-color: var(--naranja); }
+
+/* Números por departamento: nombre, número y botón de WhatsApp */
+.deptos { display: grid; gap: .625rem; margin-top: .625rem; }
+.depto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "nombre wa" "tel wa";
+  column-gap: 1rem;
+  align-items: center;
+  padding: .625rem .75rem .625rem 1rem;
+  background: var(--fondo);
+  border-left: 3px solid var(--naranja);
+  border-radius: 0 var(--radio) var(--radio) 0;
+}
+.depto__nombre {
+  grid-area: nombre;
+  font-size: .875rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  color: var(--texto-suave);
+}
+.depto__tel { grid-area: tel; justify-self: start; }
+.datos .depto__wa {
+  grid-area: wa;
+  display: grid;
+  place-items: center;
+  width: 2.75rem; height: 2.75rem;
+  background: var(--marino);
+  color: #fff;
+  border-radius: 50%;
+  transition: background-color .2s;
+}
+.datos .depto__wa:hover { background: var(--naranja-btn); }
+
+.mapa {
+  position: relative;
+  margin-bottom: .875rem;
+  aspect-ratio: 4 / 3;
+  background: var(--acero);
+  border: 1.5px solid var(--plata);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mapa iframe { width: 100%; height: 100%; border: 0; }
+
+@media (min-width: 60rem) {
+  .contacto__in {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .mapa { aspect-ratio: 5 / 4; }
+}
+
+/* ==========================================================================
+   Pie
+   ========================================================================== */
+.pie {
+  position: relative;
+  background: var(--marino);
+  color: rgba(255, 255, 255, .8);
+  font-size: 1rem;
+}
+.pie::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--vetas), var(--filete);
+}
+.pie :focus-visible { outline-color: #fff; }
+
+.pie__in {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: clamp(3.5rem, 7vw, 5rem) 3rem;
+}
+
+/* Placa de acero cepillado: permite usar el logo original sobre azul marino */
+.pie__placa {
+  display: inline-block;
+  padding: .875rem 1.125rem;
+  background: var(--vetas), var(--acero);
+  border-radius: var(--radio);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .9),
+    inset 0 -1px 0 rgba(27, 31, 59, .25),
+    0 14px 30px -14px rgba(0, 0, 0, .55);
+}
+.pie__placa .logo { height: 3.25rem; }
+.pie__marca p { margin-top: 1.25rem; max-width: 22rem; }
+
+.pie__col h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  letter-spacing: 0;
+  color: #fff;
+}
+.pie__col ul { display: grid; gap: .625rem; margin-top: 1rem; }
+.pie__col a {
+  color: rgba(255, 255, 255, .86);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.pie__col a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--naranja); text-underline-offset: .25em; }
+
+.pie__legal {
+  font-size: .9375rem;
+  color: rgba(255, 255, 255, .7);
+}
+/* el margen derecho deja libre el botón flotante de WhatsApp */
+.pie__legal p {
+  padding: 1.5rem 4.5rem 1.5rem 0;
+  border-top: 1px solid rgba(199, 204, 212, .25);
+}
+
+@media (min-width: 40rem) {
+  .pie__in { grid-template-columns: 1fr 1fr; }
+  .pie__marca { grid-column: 1 / -1; }
+}
+@media (min-width: 60rem) {
+  .pie__in { grid-template-columns: 2fr .8fr 1.2fr; gap: 3rem; }
+  .pie__marca { grid-column: auto; }
+}
+
+/* ==========================================================================
+   WhatsApp flotante
+   ========================================================================== */
+.wa-flotante {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 40;
+}
+
+/* Botón redondo: abre y cierra el menú de departamentos */
+.wa-flotante__btn {
+  display: grid;
+  place-items: center;
+  width: 3.5rem; height: 3.5rem;
+  padding: 0;
+  background: var(--marino);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px -8px rgba(27, 31, 59, .6);
+  cursor: pointer;
+  transition: transform .25s var(--curva), background-color .2s;
+}
+.wa-flotante__btn:hover { transform: translateY(-3px); background: var(--naranja); }
+.wa-flotante__btn:focus-visible { outline-offset: 4px; border-radius: 50%; }
+.wa-flotante__btn svg { grid-area: 1 / 1; }
+.wa-flotante__btn .icono-wa { width: 1.625rem; height: 1.625rem; }
+.icono-cerrar {
+  width: 1.5rem; height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+/* Abierto: el ícono de WhatsApp se cambia por una X */
+.wa-flotante__btn .icono-cerrar,
+.wa-flotante__btn[aria-expanded="true"] .icono-wa { visibility: hidden; }
+.wa-flotante__btn[aria-expanded="true"] .icono-cerrar { visibility: visible; }
+
+/* Menú con los números por departamento, encima del botón */
+.wa-flotante__panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + .75rem);
+  width: min(17.5rem, calc(100vw - 2rem));
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 22px 48px -16px rgba(27, 31, 59, .55), 0 0 0 1px rgba(27, 31, 59, .08);
+  transform-origin: 100% 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.5rem) scale(.97);
+  transition: opacity .2s, transform .25s var(--curva), visibility 0s .25s;
+}
+.wa-flotante.is-open .wa-flotante__panel,
+html:not(.js) .wa-flotante:hover .wa-flotante__panel,
+html:not(.js) .wa-flotante:focus-within .wa-flotante__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.wa-flotante__titulo {
+  padding: 1rem 1.25rem 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  line-height: 1.2;
+  color: #fff;
+  background: var(--marino);
+}
+.wa-flotante__ayuda {
+  position: relative;
+  padding: .25rem 1.25rem 1rem;
+  font-size: .875rem;
+  color: rgba(255, 255, 255, .78);
+  background: var(--marino);
+}
+/* Pestaña naranja inclinada, como en las tarjetas de insumos */
+.wa-flotante__ayuda::after {
+  content: "";
+  position: absolute;
+  left: 1.25rem; bottom: -3px;
+  width: 2.5rem; height: 6px;
+  background: var(--naranja);
+  transform: skewX(var(--inclinacion));
+}
+
+.wa-flotante__lista { padding: .625rem; display: grid; gap: .375rem; }
+.wa-flotante__lista a {
+  position: relative;
+  display: grid;
+  padding: .625rem 2.5rem .625rem .875rem;
+  background: var(--fondo);
+  border-left: 3px solid var(--naranja);
+  border-radius: 0 var(--radio) var(--radio) 0;
+  color: var(--texto);
+  text-decoration: none;
+  transition: background-color .2s;
+}
+.wa-flotante__lista a::after {
+  content: "→";
+  position: absolute;
+  right: .875rem; top: 50%;
+  translate: 0 -50%;
+  font-weight: 700;
+  color: var(--naranja-btn);
+  transition: transform .2s var(--curva);
+}
+.wa-flotante__lista a:hover { background: var(--plata-clara); }
+.wa-flotante__lista a:hover::after { transform: translateX(3px); }
+.wa-flotante__lista a:focus-visible { outline-offset: -3px; }
+.wa-flotante__depto {
+  font-size: .9375rem;
+  font-weight: 700;
+  font-stretch: 108%;
+  color: var(--marino);
+}
+.wa-flotante__num { font-size: .9375rem; color: var(--texto-suave); }
+
+/* ==========================================================================
+   Movimiento e impresión
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media print {
+  .cabecera, .wa-flotante, .mapa { display: none; }
+  .hero { padding-top: 0; }
+}
