@@ -709,19 +709,6 @@ a { color: var(--marino); }
   background: var(--naranja);
   transform: skewX(var(--inclinacion));
 }
-.origen__catalogo {
-  display: block;
-  width: fit-content;
-  margin-top: .3125rem;
-  font-size: .9375rem;
-  font-weight: 600;
-  font-stretch: 100%;
-  color: var(--plata-clara);
-  text-decoration-color: rgba(255, 255, 255, .35);
-  text-underline-offset: .25em;
-}
-.origen__catalogo::after { content: " →"; }
-.origen__catalogo:hover { color: #fff; text-decoration-color: var(--naranja); }
 
 /* Líneas con su ficha técnica al lado (colorantes) */
 .origen__lineas--filas { gap: 0; }
